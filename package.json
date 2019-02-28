@@ -1,0 +1,27 @@
+{
+  "name": "svg-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --ignore dist/  --exec babel --plugins transform-es2015-modules-umd src/SvgParser.js --out-dir dist",
+    "build": "babel --plugins transform-es2015-modules-umd src/SvgParser.js --out-dir dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tournevis/svg-path.git"
+  },
+  "author": "Tournevis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tournevis/svg-path/issues"
+  },
+  "homepage": "https://github.com/tournevis/svg-path#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
+    "nodemon": "^1.18.10"
+  }
+}

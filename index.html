@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test</title>
+</head>
+<body>
+	<div></div>
+</body>
+<script type="text/javascript" src="dist/SvgParser.js"></script>
+<script type="text/javascript">
+	var path = 'M 100 100 L 300 80 l-100,100h200V-40 M 100 10 C 50 20, 20 50, 10 100 C 20 50, 150 20, 100 10 S 150 150, 180 80 S 250 100, 80 30v12'
+	console.log(SvgParser)
+	var s = new SvgParser()
+	var res = s.parse(path)
+	console.log(res)
+</script>
+</html>

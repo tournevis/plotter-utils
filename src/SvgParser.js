@@ -8,8 +8,8 @@ class SvgParser{
 		this.precision = 10
 		this.scaleFactor = 1
 		this.translatePoint = {
-			x: 1 * this.scaleFactor,
-			y: 1 * this.scaleFactor
+			x: 0,
+			y: 0
 		}
 		this.regex = /([a-zA-Z])+\s?((?:[0-9-+.,]+\s?)*)/g
 	}
@@ -20,6 +20,41 @@ class SvgParser{
 		this.execRegex()
 		return this.commands
 	}
+	compute (commands) {
+		var cmdArray = commands || this.commands
+		for (var i = 0; i < cmdArray.length ; i++) {
+			var command = cmdArray[i]
+			switch (command.type.toUpperCase()) {
+					case 'L':
+					case 'H':
+					case 'M':
+					case 'V':
+						this.moveTo(command.type, command)
+						break;
+					case 'C':
+						this.cubicTo(command.type, command)
+						break;
+					case 'S':
+						this.cubicShortHandTo(command.type, command)
+						break;
+					case 'Q':
+						var mapCoord = this.formatCoord(coord, type)
+						this.quadraticTo(type, mapCoord)
+						break;
+					case 'T':
+						var mapCoord = this.formatCoord(coord, type)
+						this.quadraticShortHandTo(type, mapCoord)
+						break;
+					case 'Z':
+						this.backToZero()
+						break;
+					default:
+						debugger
+						break;
+				}
+		}
+		return this.coords
+	}
 
 	execRegex() {
 		let result
@@ -28,76 +63,76 @@ class SvgParser{
 			let type = result[1]
 			let coord = result[2]
 			let endline = result[3]
-			var command = this.formatCommand(coord, type)
+			this.commands.push(this.formatCommand(coord, type))
 			
 		}
 		return this.commands //this.pathElements.join(this.endLine())
 	}
 	formatCommand (str, type) {
 		var coord = str.match(/-?\d*(\.\d+)?/g).filter(function(n){ return n != '' })
-		var last = this.getLastCoord()
-		if (type === 'H') coord.push(last.y)
-		else if (type === 'V') coord.unshift(last.x)
-		else if (type === 'h') coord.push(0)
-		else if (type === 'v') coord.unshift(0)
-		for (var i = 0 ; i < coord.length - 1 ; i+=2) {
-			this.commands.push({
-				x: (parseFloat(coord[i]) * this.scaleFactor) + this.translatePoint.x,
-				y: (parseFloat(coord[i + 1]) * this.scaleFactor) + this.translatePoint.y,
-				type: type
-			})
+		if (type.toUpperCase() === 'H') coord.push(0)
+		else if (type.toUpperCase() === 'V') coord.unshift(0)
+		var obj = {
+			type: type,
+			isRelative: type !== type.toUpperCase(),
+			x: (parseFloat(coord[0]) * this.scaleFactor) + this.translatePoint.x,
+			y: (parseFloat(coord[1]) * this.scaleFactor) + this.translatePoint.y
 		}
-		return this.commands
+		for (var i = 2 ; i < coord.length - 1 ; i += 2) {
+			obj['x' + i/2] = (parseFloat(coord[i]) * this.scaleFactor) + this.translatePoint.x
+			obj['y' + i/2] = (parseFloat(coord[i + 1]) * this.scaleFactor) + this.translatePoint.y
+		}
+		return obj
 	}
 	getRelativeCoord (coords) {
 		var last = this.getLastCoord()
-		for (var i = 0; i < coords.length ; i++) {
-			coords[i] = {
-				x: last.x + coords[i].x,
-				y: last.y + coords[i].y
+		return {
+				x: last.x + coords.x,
+				y: last.y + coords.y
 			}
-		}
-		return coords
 	}
 	moveTo (type, coord) {
-		let isUpperCase = type === type.toUpperCase()
-		if (typeof coord === 'object') coord = [coord]
-		var mapCoord = isUpperCase ? coord[0] : this.getRelativeCoord(coord)[0]
+		var mapCoord = coord.isRelative ? coord : this.getRelativeCoord(coord)
 		var obj = {
-			type: type,
-			position: isUpperCase ? 'absolute': 'relative',
 			x: mapCoord.x,
 			y: mapCoord.y
 		}
 		this.coords.push(obj)
 	}
-	moveFromTo(type, coord) {
-		var mapCoord = coord[0]
-		let isUpperCase = type === type.toUpperCase()
-		mapCoord = this.getRelativeCoord(mapCoord)
-		var obj = {
-			type: type,
-			position: isUpperCase ? 'absolute': 'relative',
-			x: mapCoord.x,
-			y: mapCoord.y
-		}
-		this.coords.push(obj)
-	}
-	cubicTo (type, coord, isAbsolute) {
+	cubicTo (type, coord) {
 		var lastCoord = this.getLastCoord()
-		if (!isAbsolute) coord = this.getRelativeCoord(coord)
-		for (var i = 0; i <= 1; i += 1 / this.precision) {
-			this.coords.push(this.getCubicBezierXYatPercent(lastCoord, coord[0], coord[1], coord[2] ,i))
+		var ctrl1 = {
+			x: coord.x,
+			y: coord.y
 		}
-		this.lastControlPoint = coord[1]
+		var ctrl2 = {
+			x: coord.x1,
+			y: coord.y1
+		}
+		var ctrl3 = {
+			x: coord.x2,
+			y: coord.y2
+		}
+		for (var i = 0; i <= 1; i += 1 / this.precision) {
+			this.coords.push(this.getCubicBezierXYatPercent(lastCoord, ctrl1, ctrl2, ctrl3 ,i))
+		}
+		this.lastControlPoint = ctrl2
 	}
 	cubicShortHandTo (type, coord) {
 		var lastCoord = this.getLastCoord()
 		var mirrorControlPoint = this.getLastControlPoint()
-		for (var i = 0; i <= 1; i += 1 / this.precision) {
-			this.coords.push(this.getCubicBezierXYatPercent(lastCoord, mirrorControlPoint, coord[0], coord[1] ,i))
+		var ctrl1 = {
+			x: coord.x,
+			y: coord.y
 		}
-		this.lastControlPoint = coord[0]
+		var ctrl2 = {
+			x: coord.x1,
+			y: coord.y1
+		}
+		for (var i = 0; i <= 1; i += 1 / this.precision) {
+			this.coords.push(this.getCubicBezierXYatPercent(lastCoord, mirrorControlPoint, ctrl1, ctrl2 ,i))
+		}
+		this.lastControlPoint = ctrl1
 	}
 	quadraticTo (type, coord) {
 		var lastCoord = this.getLastCoord()
@@ -118,7 +153,6 @@ class SvgParser{
 		var x = this.CubicN(percent, startPt.x, controlPt1.x, controlPt2.x, endPt.x);
 		var y = this.CubicN(percent, startPt.y, controlPt1.y, controlPt2.y, endPt.y);
 		return ({
-			type: 'C',
 	        x: x,
 	        y: y
 	    });
