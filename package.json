@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --ignore dist/  --exec babel --plugins transform-es2015-modules-umd src/SvgParser.js --out-dir dist",
+    "dev": "webpack --config webpack.config.js --watch --env.project=treeheart",
     "build": "babel --plugins transform-es2015-modules-umd src/SvgParser.js --out-dir dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,7 +21,10 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
+    "babel-loader": "^8.0.5",
     "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
   }
 }
