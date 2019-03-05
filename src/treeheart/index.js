@@ -46,7 +46,7 @@ var setup = () => {
 		hideRand = i
 		drawPoint (ctx, getPoint[i])
 	}
-	var gcode = new Gcode(CANVAS_SIZE, true)
+	var gcode = new Gcode()
 	var flatArray =  getPoint.flat()
 	var commands = gcode.generate(flatArray)
 	console.log(commands)

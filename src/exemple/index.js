@@ -19,11 +19,11 @@ const plotterConfig = {
 	penUpCommand: 'S0 M5',
 	baseCommand: 'G01'
 }
-const gcode = new Gcode(CANVAS_SIZE)
+const gcode = new Gcode(config)
 
 var canvas
 document.addEventListener('DOMContentLoaded', function () {
-	document.body.style.background = "cream"
+	document.body.style.background = "cream"  // WU TANG !
 	canvas = createCanvas(CANVAS_SIZE, viewScale)
 	var ctx = canvas.getContext('2d')
 	var path = createPath() 
