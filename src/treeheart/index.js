@@ -37,7 +37,6 @@ var setup = () => {
 	var getPoint = []
 	for (var i = circleRange.min; i <= circleRange.max; i += 1) {
 	 	getPoint.push(generate(Math.exp(i / 20)))
-
 	 	expRadius += 0.1
 	 } 
 	console.log(getPoint)

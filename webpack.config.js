@@ -11,6 +11,7 @@ const path = require('path')
 module.exports = function(env) {
 
 const APP_DIR_NAME = env.project
+
   const APP_DIR = path.resolve(__dirname, `./src/${APP_DIR_NAME}`)
 
   return {

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --config webpack.config.js --watch --env.project=treeheart",
+    "dev": "webpack --config webpack.config.js --watch",
     "build": "babel --plugins transform-es2015-modules-umd src/SvgParser.js --out-dir dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
