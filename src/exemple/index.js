@@ -9,7 +9,7 @@ const CANVAS_SIZE = {
 }
 
 // this will scale the canvas render but NOT the generated coordonates
-const viewScale = 2
+const viewScale = 1
 
 const plotterConfig = {
 	maxSize: CANVAS_SIZE,
@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	var ctx = canvas.getContext('2d')
 	var path = createPath() 
 	drawPath(ctx, path, viewScale)
-	
 	console.log(gcode.generate(path))
 })
 
@@ -42,15 +41,15 @@ var createPath = () => {
 			y: Math.sin(i) * radius,
 			penState: 'down'
 		}
-		obj = center(obj)
+		obj = center(obj, viewScale)
 		positions.push(obj)
 	}
 	return positions
 }
 
-var center = (pos) => {
-	pos.x += CANVAS_SIZE.width / 2
-	pos.y += CANVAS_SIZE.height / 2
+var center = (pos, viewScale) => {
+	pos.x += (CANVAS_SIZE.width / 2) 
+	pos.y += (CANVAS_SIZE.height / 2) 
 	return pos
 }
 

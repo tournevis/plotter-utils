@@ -20,6 +20,7 @@ I recommand to use a dev server aside to serve index.html, this is the simplest 
 Take a look at the exemple project located in `src/exemple/`. This project generate a simple circle
 
 ### Gcode.js
+
 Generate gcodes commands from an array of points. First, you need to configure it ( config above for an eleksdraw plotter);
 ```json
  {
@@ -34,12 +35,12 @@ Generate gcodes commands from an array of points. First, you need to configure i
 	"baseCommand": "G01"
 }
 ```
-How to use it : 
 
+How to use it : 
 ```javascript
 const gcode = new Gcode(config)
 var gcodeCommands = gcode.generate(path)
-console.log(gcodeCommands)
+console.log(gcodeCommands) 
 ```
 
 More stuff comming soon, stayed tuned ! 
