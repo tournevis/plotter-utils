@@ -1,6 +1,17 @@
 body{
   margin:0;
   background:#fbfbfb;
+  font-family: 'Karla', sans-serif;
+}
+p{
+
+}
+h1,h2,h3,h4 {
+  margin-top:0;
+  text-align: left;
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  color: #404040;
 }
 #app > canvas{
   position: absolute;
@@ -9,14 +20,37 @@ body{
   transform: translate(-0%, -50%);
   box-shadow: 0 2px 11px 0 rgba(0,0,0,0.2);
 }
-.control-panel{
+
+.control-panel-container{
+  border-radius: 3px;
   position: fixed;
-  right: 0;
-  top: 0;
+  right: 20px;
+  top: 20px;
   min-width: 400px;
-  border-left: 2px solid #05ffae;
-  height: 100vh;
+  box-sizing: border-box;
   background: white;
-  padding: 5px 20px;
+  padding: 10px 10px;
   box-shadow: -1px 0 10px 0 rgba(0,0,0,0.1);
+  height: calc(100vh - 40px);
+}
+
+.control-panel{
+  height: 100%;
+  position: relative;
+}
+.control-panel-button-container{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.control-panel-button {
+  margin: 10px 0;
+  text-align: center;
+  cursor:pointer;
+  color:#ffe400;
+  border:2px #ffe400 solid;
+}
+.control-panel-button > p {
+  margin:10px 0 ;
 }

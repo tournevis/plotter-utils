@@ -19,6 +19,15 @@ I recommand to use a dev server aside to serve index.html, this is the simplest 
 ### First Sketch 
 Take a look at the exemple project located in `src/exemple/`. This project generate a simple circle
 
+### Canvas.Utils.js
+This is a time saving file with simple function:
+
+#### `createCanvas(canvasSize, viewScale)`
+Create a canvas tag after dom loaded
+
+* `canvasSize` : Object, size of the canvas as this:  `{ width: 100, height: 100}`
+* `viewScale` : Integer, that only scale the canvas render .
+
 ### Gcode.js
 
 Generate gcodes commands from an array of points. First, you need to configure it ( config above for an eleksdraw plotter);

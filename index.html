@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+  <meta charset="UTF-8">
 	<title>Test</title>
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Lora:400,700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./assets/style.css">
 </head>
 <body>
 	<div id='app'>
 	</div>
-  <div class="control-panel">
-    <div class="control-panel-button">
-      <p>Hide</p>
-    </div>
-    <div class="control-panel-button">
-      <p>Click me </p>
+  <div class="control-panel-container">
+    <div class="control-panel">
+      <h1>Plotter Utils</h1>
+      <div class="control-panel-info">
+      </div>
+      <div class="control-panel-button-container">
+        <div class="control-panel-button" id="generate">
+          <p>⚙️ Generate</p>
+        </div>
+        <div class="control-panel-button" id="download">
+          <p>⬇️ Gcode</p>
+        </div>
+      </div>
     </div>
   </div>
 </body>

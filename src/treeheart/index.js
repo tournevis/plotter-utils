@@ -1,5 +1,6 @@
 import { noise } from '@/noise.js'
 import { createCanvas, drawPath } from '@/canvas.utils'
+import { createButton } from '@/controls'
 import Gcode  from '@/Gcode.js'
 const CANVAS_SIZE = {
 	width: 200,
@@ -11,6 +12,7 @@ const curveRes = 0.05
 var expRadius = 0
 var hideRand = 0
 var noiseStrengh = 0.9
+var commands = []
 var circleRange = {
 	min: 70,
 	max: 85
@@ -19,34 +21,44 @@ var offset = {
 	x: 0, //Math.random() -0.5,
 	y: 0 //Math.random() -0.5
 }
-var canvas, seed = Math.random() * 1000
+var canvas, seed
 document.addEventListener('DOMContentLoaded', function () {
 	document.body.style.background = "cream"
 	canvas = createCanvas(CANVAS_SIZE, viewScale)
+	createButton('#generate', setup)
+	createButton('#download', download)
 	setup()
 })
 
 var setup = () => {
 	var getPoint = []
+	seed = Math.random() * 1000
+	var ctx = canvas.getContext('2d')
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	for (var i = circleRange.min; i <= circleRange.max; i += 1) {
 
 	 	getPoint.push(generate(Math.exp(i / 20)))
 	 	expRadius += 0.1
 	 } 
 	console.log(getPoint)
-	var ctx = canvas.getContext('2d')
 	for (var i = getPoint.length - 1; i >= 0; i--) {
 		hideRand = i
 		drawPath(ctx, getPoint[i], viewScale)
 	}
 	var gcode = new Gcode()
 	var flatArray =  getPoint.flat()
-	var commands = gcode.generate(flatArray)
+	commands = gcode.generate(flatArray)
 	console.log(commands)
 }
 
 
-
+var download = () => {
+	let render = document.querySelector('.control-panel-container')
+	let link = document.createElement('a')
+	link.download = 'spiral.gcode'
+	link.href = 'data:text/plain,' + commands
+	link.click()
+}
 var generate = (base = 20) => {
 	var positions = []
 	var offsetMult = 0
