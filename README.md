@@ -3,7 +3,10 @@ Welcome to My plotter lib. Here you will find multiples tools to parse svg path,
 Every tools is located in the `lib/` folder and you can find a doc for each one right above. 
 This is an early work and still a work in project, be carefull using it ! 
 
+![Interface](assets/screen.png)
+
 I Own an Eleksdraw plotter, at the moment this is the only machin i have access. 
+
 ## Install 
 
 To install dependencies and run the exemple project 
