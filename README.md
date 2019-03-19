@@ -1,5 +1,7 @@
 # Plotter utils 🐝 !
-Welcome to My plotter lib. Here you will find multiples tools to parse svg path, generate gcode and more. 
+⚠️ THIS IS A WORK IN PROGRESS  ⚠️
+
+Welcome to my plotter lib. Here you will find multiples tools to parse svg path, generate gcode and more. 
 Every tools is located in the `lib/` folder and you can find a doc for each one right above. 
 This is an early work and still a work in project, be carefull using it ! 
 
