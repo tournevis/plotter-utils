@@ -19,7 +19,7 @@ const plotterConfig = {
 	penUpCommand: 'S0 M5',
 	baseCommand: 'G01'
 }
-const gcode = new Gcode(config)
+const gcode = new Gcode(plotterConfig)
 
 var canvas
 document.addEventListener('DOMContentLoaded', function () {

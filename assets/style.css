@@ -1,0 +1,22 @@
+body{
+  margin:0;
+  background:#fbfbfb;
+}
+#app > canvas{
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  transform: translate(-0%, -50%);
+  box-shadow: 0 2px 11px 0 rgba(0,0,0,0.2);
+}
+.control-panel{
+  position: fixed;
+  right: 0;
+  top: 0;
+  min-width: 400px;
+  border-left: 2px solid #05ffae;
+  height: 100vh;
+  background: white;
+  padding: 5px 20px;
+  box-shadow: -1px 0 10px 0 rgba(0,0,0,0.1);
+}
