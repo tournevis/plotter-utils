@@ -3,19 +3,21 @@ import { createCanvas, drawPath } from '@/canvas.utils'
 import { createButton } from '@/controls'
 import Gcode  from '@/Gcode.js'
 const CANVAS_SIZE = {
-	width: 200,
-	height: 287
+	width: 148,
+	height: 210
 }
-
+const gcodeConfig = {
+	revert: true
+}
 const viewScale = 2
 const curveRes = 0.05
 var expRadius = 0
-var hideRand = 0
+
 var noiseStrengh = 0.9
 var commands = []
 var circleRange = {
-	min: 70,
-	max: 85
+	min: 55,
+	max: 70
 }
 var offset = {
 	x: 0, //Math.random() -0.5,
@@ -42,10 +44,9 @@ var setup = () => {
 	 } 
 	console.log(getPoint)
 	for (var i = getPoint.length - 1; i >= 0; i--) {
-		hideRand = i
 		drawPath(ctx, getPoint[i], viewScale)
 	}
-	var gcode = new Gcode()
+	var gcode = new Gcode(gcodeConfig)
 	var flatArray =  getPoint.flat()
 	commands = gcode.generate(flatArray)
 	console.log(commands)
@@ -67,7 +68,7 @@ var generate = (base = 20) => {
 		var obj = {
 			x: Math.cos(i) * radius + CANVAS_SIZE.width / 2 + base * offset.x,
 			y:  CANVAS_SIZE.height / 2 - Math.sin(i) * radius + base * offset.y,
-			penState: Math.random() * base < (circleRange.min / 2) ? 'down' : 'up'
+			penState: Math.random() * base < (circleRange.min / 2.4) ? 'down' : 'up'
 		}
 		positions.push(obj)
 	}

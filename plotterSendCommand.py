@@ -5,7 +5,7 @@ import time
 s = serial.Serial('/dev/tty.usbserial-1410',115200)
 
 # Open g-code file
-f = open('assets/blob.gcode','r');
+f = open('assets/wave1.gcode','r');
 
 # Wake up grbl
 s.write("\r\n\r\n")

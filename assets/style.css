@@ -1,7 +1,10 @@
 body{
   margin:0;
-  background:#fbfbfb;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: #f3f8fb;
   font-family: 'Karla', sans-serif;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 50px, rgba(255,255,255,1) 50px, rgba(255,255,255,1) 100px);
 }
 p{
 
