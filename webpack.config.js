@@ -7,13 +7,13 @@
 // 7. npm start
 // 8. Browse to http://localhost:8080/dist/
 
+const argv = require('yargs').argv
 const path = require('path')
+
+const APP_DIR_NAME = argv.project || 'exemple'
+const APP_DIR = path.resolve(__dirname, `./src/${APP_DIR_NAME}`)
+console.log('🐝 Startin webpack 🐝')
 module.exports = function(env) {
-
-const APP_DIR_NAME = env.project
-
-  const APP_DIR = path.resolve(__dirname, `./src/${APP_DIR_NAME}`)
-
   return {
     entry: APP_DIR + '/index.js',
     output: {
