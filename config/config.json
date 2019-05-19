@@ -1,0 +1,11 @@
+{
+	"maxSize": {
+		"width": 148,
+		"height": 210
+	},
+	"revert": "true",
+	"unit": "G21",
+	"penDownCommand": "S1000 M3",
+	"penUpCommand": "S0 M5",
+	"baseCommand": "G01"
+}

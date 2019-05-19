@@ -2,7 +2,7 @@ body{
   margin:0;
   min-width: 100vw;
   min-height: 100vh;
-  background-color: #f3f8fb;
+  background-color: #efefef;
   font-family: 'Karla', sans-serif;
   background-image: repeating-linear-gradient(-45deg, transparent, transparent 50px, rgba(255,255,255,1) 50px, rgba(255,255,255,1) 100px);
 }
@@ -27,14 +27,14 @@ h1,h2,h3,h4 {
 .control-panel-container{
   border-radius: 3px;
   position: fixed;
-  right: 20px;
-  top: 20px;
+  right: 0px;
+  top: 0px;
   min-width: 400px;
   box-sizing: border-box;
-  background: white;
+  background: #fffbef;
   padding: 10px 10px;
   box-shadow: -1px 0 10px 0 rgba(0,0,0,0.1);
-  height: calc(100vh - 40px);
+  height: calc(100vh);
 }
 
 .control-panel{
@@ -50,9 +50,15 @@ h1,h2,h3,h4 {
 .control-panel-button {
   margin: 10px 0;
   text-align: center;
-  cursor:pointer;
-  color:#ffe400;
-  border:2px #ffe400 solid;
+  cursor: pointer;
+  color: #729cb5;
+  background: #dcfbff;
+  padding: 1px 0;
+  border-radius: 3px;
+    /* border: 2px #c6dfec solid; */
+}
+.control-panel-button:hover{
+  background:#c3f5fb;
 }
 .control-panel-button > p {
   margin:10px 0 ;

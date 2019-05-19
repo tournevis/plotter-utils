@@ -29,7 +29,8 @@ module.exports = function(env) {
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'lib/')
+        '@': path.resolve(__dirname, 'lib/'),
+        'config': path.resolve(__dirname, 'config/config.json')
       }
     },
     devServer: {
